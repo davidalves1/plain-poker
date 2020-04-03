@@ -1,32 +1,35 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
-  </div>
+  <v-app>
+    <v-app-bar app color="primary" dark>
+      <h1>PlaningPoker</h1>
+    </v-app-bar>
+
+    <v-content>
+      <v-row class="justify-center">
+        <v-col size="12">
+          <v-text-field />
+          <v-btn color="primary" large>
+            <span>Criar um quadro novo</span>
+            <v-icon class="">mdi-plus-box</v-icon>
+          </v-btn>
+        </v-col>
+        <v-col size="12">
+          <v-btn color="primary" large>
+            <span class="mr-2">Entrar em um quadro existente</span>
+            <v-icon>mdi-open-in-new</v-icon>
+          </v-btn>
+        </v-col>
+      </v-row>
+    </v-content>
+  </v-app>
 </template>
 
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+<script>
 
-#nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
-}
-</style>
+export default {
+  name: 'App',
+  data: () => ({
+    //
+  }),
+};
+</script>
