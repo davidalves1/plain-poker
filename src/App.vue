@@ -1,26 +1,21 @@
 <template>
   <v-app>
     <v-app-bar app color="primary" dark>
-      <h1>PlaningPoker</h1>
+      <h1>PlanningPoker</h1>
+      <v-spacer></v-spacer>
+      <span>ID: {{ boardId }}</span>
     </v-app-bar>
 
     <v-content>
-      <v-row class="justify-center">
-        <v-col size="12">
-          <v-text-field />
-          <v-btn color="primary" large>
-            <span>Criar um quadro novo</span>
-            <v-icon class="">mdi-plus-box</v-icon>
-          </v-btn>
-        </v-col>
-        <v-col size="12">
-          <v-btn color="primary" large>
-            <span class="mr-2">Entrar em um quadro existente</span>
-            <v-icon>mdi-open-in-new</v-icon>
-          </v-btn>
-        </v-col>
-      </v-row>
+      <router-view></router-view>
     </v-content>
+
+    <v-footer>
+      <v-spacer></v-spacer>
+      <div class="my-3">
+        Created with <v-icon color="red" small class="mx-1">mdi-heart</v-icon> by davidalves1
+      </div>
+    </v-footer>
   </v-app>
 </template>
 
@@ -28,8 +23,10 @@
 
 export default {
   name: 'App',
-  data: () => ({
-    //
-  }),
+  computed: {
+    boardId() {
+      return this.$route.params.boardId;
+    },
+  },
 };
 </script>

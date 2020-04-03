@@ -11,9 +11,14 @@ const routes = [
     component: Home,
   },
   {
+    path: '/board',
+    name: 'JoinBoard',
+    component: () => import(/* webpackChunkName: "JoinBoard" */ '../views/JoinBoard.vue'),
+  },
+  {
     path: '/board/:boardId',
-    name: 'board',
-    component: () => import(/* webpackChunkName: "board" */ '../views/Board.vue'),
+    name: 'Board',
+    component: () => import(/* webpackChunkName: "Board" */ '../views/Board.vue'),
   },
 ];
 
