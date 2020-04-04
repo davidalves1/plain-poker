@@ -2,11 +2,12 @@
   <v-app>
     <v-app-bar app color="primary" dark>
       <h1>PlanningPoker</h1>
+      <v-btn @click="goHome" v-if="shouldShowBackButton" color="primary" class="ml-5">Home</v-btn>
       <v-spacer></v-spacer>
-      <span>ID: {{ boardId }}</span>
+      <span v-if="boardId" class="d-none d-md-flex">ID: {{ boardId }}</span>
     </v-app-bar>
 
-    <v-content>
+    <v-content class="ma-3">
       <router-view></router-view>
     </v-content>
 
@@ -26,6 +27,14 @@ export default {
   computed: {
     boardId() {
       return this.$route.params.boardId;
+    },
+    shouldShowBackButton() {
+      return this.$route.path.includes('board');
+    },
+  },
+  methods: {
+    goHome() {
+      this.$router.replace({ name: 'Home' });
     },
   },
 };
