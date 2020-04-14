@@ -14,7 +14,7 @@
     <v-footer>
       <v-spacer></v-spacer>
       <div class="my-3">
-        Created with <v-icon color="red" small class="mx-1">mdi-heart</v-icon> by davidalves1
+        By <a class="footer__link" href="https://davidalves1.com" target="_blank">@davidalves1</a>
       </div>
     </v-footer>
   </v-app>
@@ -39,3 +39,11 @@ export default {
   },
 };
 </script>
+
+<style lang="scss" scoped>
+  .footer__link {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+  }
+</style>
