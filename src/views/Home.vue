@@ -19,12 +19,19 @@
 
 <script>
 import { v4 as uuidv4 } from 'uuid';
+import * as storage from '../services/storage';
 
 export default {
   name: 'Home',
+  created() {
+    storage.set('isAdmin', false);
+    storage.remove('boardId');
+  },
   methods: {
     newBoard() {
       const boardId = uuidv4();
+      storage.set('isAdmin', true);
+      storage.set('boardId', boardId);
       this.$router.push({ name: 'Board', params: { boardId } });
     },
     joinBoard() {

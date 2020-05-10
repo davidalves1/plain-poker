@@ -22,6 +22,8 @@
 </template>
 
 <script>
+import * as storage from '../services/storage';
+
 export default {
   name: 'JoinBoard',
   data() {
@@ -40,6 +42,9 @@ export default {
   },
   methods: {
     goBoard() {
+      storage.set('isAdmin', false);
+      storage.set('boardId', this.boardId);
+
       this.$router.push({ name: 'Board', params: { boardId: this.boardId } });
     },
   },
