@@ -25,6 +25,7 @@ export default {
   methods: {
     newBoard() {
       const boardId = uuidv4();
+      this.$store.commit('setBoard', { id: boardId, isAdmin: true });
       this.$router.push({ name: 'Board', params: { boardId } });
     },
     joinBoard() {
