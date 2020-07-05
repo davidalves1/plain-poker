@@ -21,6 +21,9 @@
 </template>
 
 <script>
+import { v4 as uuidv4 } from 'uuid';
+import io from 'socket.io-client';
+import * as storage from './services/storage';
 
 export default {
   name: 'App',
@@ -32,7 +35,21 @@ export default {
       return this.$route.path.includes('board');
     },
   },
+  created() {
+    this.initData();
+  },
   methods: {
+    initData() {
+      const userId = uuidv4();
+      storage.add('userId', userId);
+      storage.add('name', userId.substr(0, 8));
+
+      const socket = io('http://localhost:5000');
+      socket.on('board', (boardId) => {
+        // eslint-disable-next-line no-console
+        console.log({ boardId });
+      });
+    },
     goHome() {
       this.$router.replace({ name: 'Home' });
     },
