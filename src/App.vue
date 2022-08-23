@@ -7,9 +7,9 @@
       <span v-if="boardId" class="d-none d-md-flex">ID: {{ boardId }}</span>
     </v-app-bar>
 
-    <v-content class="ma-3">
+    <v-main class="ma-3">
       <router-view></router-view>
-    </v-content>
+    </v-main>
 
     <v-footer>
       <v-spacer></v-spacer>

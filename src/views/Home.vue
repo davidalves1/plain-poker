@@ -1,5 +1,5 @@
 <template>
-  <v-content>
+  <v-main>
     <v-row>
       <v-col md="3" offset-md="3">
         <v-btn color="primary" large block @click="newBoard">
@@ -14,7 +14,7 @@
         </v-btn>
       </v-col>
     </v-row>
-  </v-content>
+  </v-main>
 </template>
 
 <script>
