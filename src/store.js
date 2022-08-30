@@ -25,8 +25,7 @@ const store = createStore({
       console.log({ ...state });
     },
     addTask(state, { title, description }) {
-      const { tasks } = state.board;
-      tasks.push({
+      state.board.tasks.push({
         title,
         description,
         id: uuidv4(),

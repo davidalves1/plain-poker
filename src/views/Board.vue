@@ -41,18 +41,22 @@
       </v-col>
       <v-col offset-md="1" md="3">
         <h2>Usuários conectados</h2>
+        <code>{{ board }}</code>
       </v-col>
     </v-row>
   </v-container>
 </template>
 
 <script>
+import { getBoardRef, onValueChange } from '../services/boardsDatabase';
+
 export default {
   name: 'Board',
   data() {
     return {
       title: '',
       description: '',
+      board: {},
     };
   },
   computed: {
@@ -65,6 +69,9 @@ export default {
     hasTasks() {
       return this.tasks.length > 0;
     },
+  },
+  mounted() {
+    this.startBoard(this.boardId, this.board);
   },
   methods: {
     addNewTask() {
@@ -82,6 +89,15 @@ export default {
     },
     getRowClass(index) {
       return index % 2 !== 0 ? 'list__item' : '';
+    },
+    startBoard(boardId) {
+      const boardRef = getBoardRef(boardId);
+
+      onValueChange(boardRef, (snapshot) => {
+        const value = snapshot.val();
+        console.log('🚀 ~ onValueChange ~ value', value);
+        this.board = value;
+      });
     },
   },
 };

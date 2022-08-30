@@ -18,20 +18,32 @@
 </template>
 
 <script>
-import { v4 as uuidv4 } from 'uuid';
 import * as storage from '../services/storage';
+import { createBoard } from '../services/boardsDatabase';
 
 export default {
   name: 'Home',
+  data() {
+    return {
+      board: null,
+    };
+  },
   created() {
     storage.set('isAdmin', false);
     storage.remove('boardId');
   },
   methods: {
-    newBoard() {
-      const boardId = uuidv4();
-      this.$store.commit('setBoard', { id: boardId, isAdmin: true });
-      this.$router.push({ name: 'Board', params: { boardId } });
+    async newBoard() {
+      // this.$store.commit('setBoard', { id: boardId, isAdmin: true });
+      try {
+        // TODO: move this logic to New Board view
+        const boardId = await createBoard('Batatas');
+        console.log('🚀 ~ newBoard ~ result', boardId);
+
+        this.$router.push({ name: 'Board', params: { boardId } });
+      } catch (err) {
+        console.log('🚀 ~ newBoard ~ err', err);
+      }
     },
     joinBoard() {
       this.$router.push({ name: 'JoinBoard' });
