@@ -18,8 +18,6 @@
 </template>
 
 <script>
-import * as storage from '../services/storage';
-import { createBoard } from '../services/boardsDatabase';
 
 export default {
   name: 'Home',
@@ -28,22 +26,9 @@ export default {
       board: null,
     };
   },
-  created() {
-    storage.set('isAdmin', false);
-    storage.remove('boardId');
-  },
   methods: {
     async newBoard() {
-      // this.$store.commit('setBoard', { id: boardId, isAdmin: true });
-      try {
-        // TODO: move this logic to New Board view
-        const boardId = await createBoard('Batatas');
-        console.log('🚀 ~ newBoard ~ result', boardId);
-
-        this.$router.push({ name: 'Board', params: { boardId } });
-      } catch (err) {
-        console.log('🚀 ~ newBoard ~ err', err);
-      }
+      this.$router.push({ name: 'NewBoard' });
     },
     joinBoard() {
       this.$router.push({ name: 'JoinBoard' });

@@ -6,6 +6,9 @@
     <v-row>
       <v-col cols="12" md="8">
         <v-row>
+          <v-col>
+            <h1># {{ board.name }}</h1>
+          </v-col>
           <v-col cols="12">
             <h2>Tarefas</h2>
             <p v-if="!hasTasks" class="text-center">Não existem tarefas cadastradas</p>
@@ -41,14 +44,17 @@
       </v-col>
       <v-col offset-md="1" md="3">
         <h2>Usuários conectados</h2>
-        <code>{{ board }}</code>
+        <ul>
+          <li v-for="(user, id) in users" :key="id">{{ user.name }}</li>
+        </ul>
       </v-col>
     </v-row>
   </v-container>
 </template>
 
 <script>
-import { getBoardRef, onValueChange } from '../services/boardsDatabase';
+import { onValueChange, getBoardRef } from '../services/boardsDatabase';
+import { deleteUser } from '../services/usersDatabase';
 
 export default {
   name: 'Board',
@@ -66,12 +72,19 @@ export default {
     tasks() {
       return this.$store.state.board.tasks;
     },
+    users() {
+      const result = this.board?.users || {};
+      return Object.values(result);
+    },
     hasTasks() {
       return this.tasks.length > 0;
     },
   },
   mounted() {
-    this.startBoard(this.boardId, this.board);
+    this.startBoard();
+  },
+  beforeDestroy() {
+    deleteUser();
   },
   methods: {
     addNewTask() {
@@ -90,13 +103,11 @@ export default {
     getRowClass(index) {
       return index % 2 !== 0 ? 'list__item' : '';
     },
-    startBoard(boardId) {
-      const boardRef = getBoardRef(boardId);
+    startBoard() {
+      const boardRef = getBoardRef(this.boardId);
 
       onValueChange(boardRef, (snapshot) => {
-        const value = snapshot.val();
-        console.log('🚀 ~ onValueChange ~ value', value);
-        this.board = value;
+        this.board = snapshot.val();
       });
     },
   },

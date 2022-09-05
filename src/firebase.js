@@ -1,5 +1,5 @@
 import { initializeApp } from 'firebase/app';
-import { getDatabase } from 'firebase/database';
+import { getDatabase, ref } from 'firebase/database';
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -16,3 +16,5 @@ const firebaseConfig = {
 export const app = initializeApp(firebaseConfig);
 
 export const database = getDatabase(app);
+
+export const getRef = (path) => ref(database, `/${path}`);
