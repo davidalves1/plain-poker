@@ -6,7 +6,7 @@ import * as storage from './storage';
 
 export const onValueChange = onValue;
 
-export const getBoardRef = (boardId) => getRef(boardId);
+export const getBoardRef = boardId => getRef(boardId);
 
 export const createBoard = async (boardName, userName) => {
   const boardId = uuidv4();
@@ -36,7 +36,7 @@ export const joinBoard = async (boardId, userName) => {
 
   let board = {};
 
-  onValue(boardRef, (snapshot) => {
+  onValue(boardRef, snapshot => {
     board = snapshot.val();
   });
 
@@ -47,7 +47,7 @@ export const joinBoard = async (boardId, userName) => {
   return board;
 };
 
-export const deleteBoard = async (boardId) => {
+export const deleteBoard = async boardId => {
   const boardRef = getRef(`${boardId}`);
 
   await remove(boardRef);
