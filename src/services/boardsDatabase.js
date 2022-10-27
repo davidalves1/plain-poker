@@ -1,8 +1,8 @@
 import { onValue, set, remove } from 'firebase/database';
 import { v4 as uuidv4 } from 'uuid';
-import { getRef } from '../firebase';
 import { addUser } from './usersDatabase';
 import * as storage from './storage';
+import { getRef } from '@shared/firebase';
 
 export const onValueChange = onValue;
 

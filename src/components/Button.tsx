@@ -1,13 +1,11 @@
-import Link from 'next/link';
-
-interface LinkButtonProps {
-  to: string;
+interface ButtonProps {
   variant: 'primary' | 'secondary' | 'outline';
   children: JSX.Element | string;
   fullWidth?: boolean;
+  onClick?: () => void;
 }
 
-const LinkButton = ({ to, variant, fullWidth, children }: LinkButtonProps) => {
+const Button = ({ variant, fullWidth, children, onClick }: ButtonProps) => {
   enum VARIANTS {
     'primary' = 'bg-cyan-900 text-white',
     'secondary' = 'bg-zync-500 text-white',
@@ -17,14 +15,13 @@ const LinkButton = ({ to, variant, fullWidth, children }: LinkButtonProps) => {
   const isFullWidth = fullWidth ? 'w-full' : '';
 
   return (
-    <Link href={to}>
-      <a
-        className={`px-3 py-2 rounded hover:bg-opacity-90 transition duration-300 text-center ${VARIANTS[variant]} ${isFullWidth}`}
-      >
-        {children}
-      </a>
-    </Link>
+    <button
+      className={`px-3 py-2 rounded hover:bg-opacity-90 transition duration-300 text-center ${VARIANTS[variant]} ${isFullWidth}`}
+      onClick={onClick}
+    >
+      {children}
+    </button>
   );
 };
 
-export default LinkButton;
+export default Button;

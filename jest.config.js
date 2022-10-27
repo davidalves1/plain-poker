@@ -17,6 +17,8 @@ const customJestConfig = {
     '^@components/(.*)$': '<rootDir>/src/components/$1',
     '^@styles/(.*)$': '<rootDir>/src/styles/$1',
     '^@pages/(.*)$': '<rootDir>/src/pages/$1',
+    '^@services/(.*)$': '<rootDir>/src/services/$1',
+    '^@shared/(.*)$': '<rootDir>/src/shared/$1',
   },
 };
 
