@@ -1,10 +1,11 @@
 interface ConditionalComponentProps {
   condition: boolean;
-  children?: JSX.Element;
+  children: JSX.Element;
+  fallback?: JSX.Element;
 }
 
-const ConditionalComponent = ({ condition, children }: ConditionalComponentProps) => {
-  return condition && children;
+const ConditionalComponent = ({ condition, fallback, children }: ConditionalComponentProps) => {
+  return condition ? children : fallback;
 };
 
 export default ConditionalComponent;
