@@ -8,6 +8,7 @@
     "start": "next start",
     "lint": "next lint --fix",
     "test": "jest --passWithNoTests",
+    "test:watch": "yarn test --watchAll",
     "test:cov": "yarn test --collectCoverage",
     "stop": "kill -9 $(lsof -ti :3000)"
   },
