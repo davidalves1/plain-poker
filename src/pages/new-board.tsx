@@ -10,15 +10,18 @@ const NewBoard: NextPage = () => {
 
   const [boardName, setBoardName] = useState(null);
   const [userName, setUserName] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleGoBoard = async () => {
     try {
+      setIsLoading(true);
       // TODO: move this logic to New Board view
       const boardId = await createBoard(boardName, userName);
-      console.log('🚀 ~ handleGoBoard ~ boardId', boardId);
       router.push(`/board/${boardId}`);
     } catch (err) {
       console.log('🚀 ~ newBoard ~ err', err);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -38,7 +41,7 @@ const NewBoard: NextPage = () => {
         <TextField type="text" label="Seu nome" onChange={handleChangeUserName} />
       </div>
       <div className="flex justify-center mx-5 mt-5">
-        <Button variant="primary" onClick={handleGoBoard} fullWidth>
+        <Button variant="primary" onClick={handleGoBoard} loading={isLoading} fullWidth>
           Criar
         </Button>
       </div>

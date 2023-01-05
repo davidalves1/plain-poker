@@ -23,8 +23,10 @@ const Button = ({ variant, fullWidth, children, disabled, loading, onClick }: Bu
 
   return (
     <button
-      className={`px-3 py-2 rounded hover:bg-opacity-90 transition duration-300 text-center disabled:bg-slate-300 disabled:text-white disabled:border-none ${VARIANTS[variant]} ${isFullWidth}`}
-      disabled={disabled}
+      className={`px-3 py-2 rounded hover:bg-opacity-90 transition duration-300 flex justify-center
+        disabled:bg-slate-300 disabled:text-white disabled:border-none
+        ${VARIANTS[variant]} ${isFullWidth}`}
+      disabled={disabled || loading}
       onClick={onClick}
     >
       <ConditionalComponent condition={!loading} fallback={loadingElement}>

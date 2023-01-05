@@ -32,6 +32,7 @@ export const createBoard = async (boardName, userName) => {
 };
 
 export const joinBoard = async (boardId, userName) => {
+  // const boardRef = getBoardRef(boardId);
   const boardRef = getRef(`${boardId}`);
 
   let board = {};
@@ -39,6 +40,16 @@ export const joinBoard = async (boardId, userName) => {
   onValue(boardRef, snapshot => {
     board = snapshot.val();
   });
+
+  if (!board._id) {
+    throw new Error('O quadro informado não existe');
+  }
+
+  const savedUserId = storage.get('userId');
+
+  if (savedUserId && board.users[savedUserId]) {
+    return board;
+  }
 
   const userId = await addUser(boardId, { name: userName, isAdmin: false });
   storage.set('userName', userName);
@@ -52,4 +63,8 @@ export const deleteBoard = async boardId => {
 
   await remove(boardRef);
   storage.remove('userId');
+};
+
+export const deleteUser = async (boardId, userId) => {
+  console.log('🚀 ~ deleteUser', { boardId, userId });
 };
