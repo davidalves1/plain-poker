@@ -33,21 +33,20 @@ export const createBoard = async (boardName, userName) => {
 
 export const joinBoard = async (boardId, userName) => {
   // const boardRef = getBoardRef(boardId);
-  const boardRef = getRef(`${boardId}`);
+  const boardRef = getRef(boardId);
 
   let board = {};
-
   onValue(boardRef, snapshot => {
     board = snapshot.val();
   });
 
-  if (!board._id) {
-    throw new Error('O quadro informado não existe');
+  if (!board?._id || boardId !== board._id) {
+    throw new Error('O quadro informado ẽ inválido');
   }
 
   const savedUserId = storage.get('userId');
 
-  if (savedUserId && board.users[savedUserId]) {
+  if (savedUserId && board?.users[savedUserId]) {
     return board;
   }
 
