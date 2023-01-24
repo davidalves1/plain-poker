@@ -3,6 +3,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { addUser } from './usersDatabase';
 import * as storage from './storage';
 import { getRef } from '@shared/firebase';
+import { Board } from '@shared/models/Board';
 
 export const onValueChange = onValue;
 
@@ -31,14 +32,23 @@ export const createBoard = async (boardName, userName) => {
   return boardId;
 };
 
+const asyncOnValue = (boardRef): Promise<Board> =>
+  new Promise((res, rej) => {
+    onValue(
+      boardRef,
+      snapshot => {
+        res(snapshot.val());
+      },
+      error => {
+        rej(error);
+      },
+    );
+  });
+
 export const joinBoard = async (boardId, userName) => {
-  // const boardRef = getBoardRef(boardId);
   const boardRef = getRef(boardId);
 
-  let board = {};
-  onValue(boardRef, snapshot => {
-    board = snapshot.val();
-  });
+  const board: Board = await asyncOnValue(boardRef);
 
   if (!board?._id || boardId !== board._id) {
     throw new Error('O quadro informado ẽ inválido');
@@ -46,6 +56,7 @@ export const joinBoard = async (boardId, userName) => {
 
   const savedUserId = storage.get('userId');
 
+  // E SE EU QUISER TROCAR O NOME???
   if (savedUserId && board?.users[savedUserId]) {
     return board;
   }
