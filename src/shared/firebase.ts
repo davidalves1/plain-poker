@@ -3,7 +3,7 @@ import { getDatabase, ref } from 'firebase/database';
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: process.env.VUE_APP_FIREBASE_API_KEY,
+  apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
   authDomain: 'curso-next-cod3r.firebaseapp.com',
   databaseURL: 'https://curso-next-cod3r-default-rtdb.europe-west1.firebasedatabase.app',
   projectId: 'curso-next-cod3r',
@@ -17,4 +17,4 @@ export const app = initializeApp(firebaseConfig);
 
 export const database = getDatabase(app);
 
-export const getRef = (path) => ref(database, `/${path}`);
+export const getRef = path => ref(database, `/${path}`);

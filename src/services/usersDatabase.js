@@ -1,6 +1,6 @@
 import { set, remove } from 'firebase/database';
 import { v4 as uuidv4 } from 'uuid';
-import { getRef } from '../firebase';
+import { getRef } from '../shared/firebase';
 
 export const addUser = async (boardId, user) => {
   const userId = uuidv4();
